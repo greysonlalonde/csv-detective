@@ -3,15 +3,33 @@ import glob
 import pandas as pd
 
 
-
 def searchFolder(path=None, *args):
     '''
-    Search a value within a folder of csv files.
+    Search value(s) within a folder of csv files.
        
     If searching multiple values, separate each value by commas
+    
+    
+    Parameters
+    ----------
+    path: folder name (not full path)
+    
+    args: value(s)
+    
+    
+    Returns
+    ----------
+    cls: pandas dataframe
+    
+    
+    Examples
+    ----------
+    >>> from searcherGuy import searchFolder
+    >>> searchFolder('foo', 'bar', 'foobar')
+    pd.DataFrame
+    
     '''
-    path = input("Enter folder name: ")
-    args = input("Enter search value(s): ").split(',')
+    
     for p, dirnames, filenames in os.walk('/'):
         if path in dirnames:
             p = p + '\\' + path
@@ -27,3 +45,5 @@ def searchFolder(path=None, *args):
     except pd.errors.ParserError as e:
         print('Folder not found')
         pass
+    
+    
